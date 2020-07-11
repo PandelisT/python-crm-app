@@ -6,18 +6,19 @@ init(autoreset=True)
 
 def options_display():
     options_table = input("""
-\nHere are your options:\n
-Press V to view all clients info
-Press C to view clients names
-Press A to add client
-Press U to update client status
-...\n""")
+Here are your options:\n
+Press "V" to view all clients info
+Press "C" to view clients names
+Press "A" to add client
+Press "M" to see money you're owed currently
+Press "U" to update client status\n
+Type the letter here: """)
+    options_table = options_table.upper().strip().replace(" ", "")
     if options_table == "V":
         display_clients(c.all_clients)
     elif options_table == "C":
-        print("All  your client names are: ")
+        print("All your client names are: ")
         list_clients(c.all_clients)
-
     elif options_table == "A":
 # Adding a new client:
         client = input("New client name: ")
@@ -25,16 +26,11 @@ Press U to update client status
         add_client(c.all_clients, client, info)
 # Display all clients in table including new one:
         display_clients(c.all_clients)
+    elif options_table == "M":
+        owed_money_total()
 # elif options_table == "U":
-
-# else: 
-def repeat_display():
-    action = input("\nWould you like to do something else? (Y/N)\n")
-    if action == "Y":
-        options_display()
-    elif action == "N":
-        cont = False
-        exit()
+    else:
+        print("That wasn't an option. Try again: \n")
 
 #Coloured all client's table
 def display_clients(clients):
