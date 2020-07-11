@@ -4,6 +4,38 @@ import clients as c
 from colorama import init, Fore, Back, Style
 init(autoreset=True)
 
+def options_display():
+    options_table = input("""
+\nHere are your options:\n
+Press V to view all clients info
+Press C to view clients names
+Press A to add client
+Press U to update client status
+...\n""")
+    if options_table == "V":
+        display_clients(c.all_clients)
+    elif options_table == "C":
+        print("All  your client names are: ")
+        list_clients(c.all_clients)
+
+    elif options_table == "A":
+# Adding a new client:
+        client = input("New client name: ")
+        info = []
+        add_client(c.all_clients, client, info)
+# Display all clients in table including new one:
+        display_clients(c.all_clients)
+# elif options_table == "U":
+
+# else: 
+def repeat_display():
+    action = input("\nWould you like to do something else? (Y/N)\n")
+    if action == "Y":
+        options_display()
+    elif action == "N":
+        cont = False
+        exit()
+
 #Coloured all client's table
 def display_clients(clients):
     print ('\033[31m' + f"{'Client Name':<20} {'Status':<20} {'Payment status':<20} {'Initial Quote':<20}")

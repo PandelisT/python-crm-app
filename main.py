@@ -6,61 +6,69 @@ import time
 
 # 1. Log in to application w/ username and password
 
-# print ("Welcome to Nerdy Pandy's CRM Application")
+print ("Welcome to Nerdy Pandy's CRM Application\n")
 
-# CorrectUsername = "Pandelis"
-# CorrectPassword = "NerdyPandy"
+time.sleep(2)
 
-# attempt = True
-# while attempt:
-#     username = input("Please enter your username: ")
-#     if username == CorrectUsername:
-#     	password = input("Please enter your password: ")
-#     else:
-#         print ("Username incorrect!")
-#         exit()
-#     if password == CorrectPassword:
-#         print ("Logged in successfully as " + username)
-#         attempt = False
-#     else:
-#         print ("Password incorrect!")
+print("Enter the correct username and password combination to access this app:\n")
+
+count=0
+while count<4:
+    username=input('Enter username: ')
+    password=input('Enter password: ')
+    if username =='b' and password =='a':
+        print('\nAccess granted')
+        break
+    elif username !='b' and password !='a':
+        print('Access denied. Try again.')
+        count+=1       
+
+if count == 4:
+    print("Too many attempts. Bye!")
+    exit()
 
 
 # 2. Random inspirational quote:
-
-# inspirational_quote = random.choice(q.quotes)
-# print(inspirational_quote)
+time.sleep(2)
+print("\nDaily inspiration for you today:\n")
+inspirational_quote = random.choice(q.quotes)
+print(inspirational_quote)
 
 # # 3. Set goal for today:
 
-# time.sleep(5)
-# today_goal = input("What will your main goal be for today?\n")
+time.sleep(2)
+today_goal = input("\nWhat will your main goal be for today?\n")
 
-# print("Good job! I will remind you at the end of your goal again!")
+print("Good job! I will remind you at the end of your goal again!\n")
 
 # 4. Show options table (view clients all info, view client names, add clients, update status of clients):
 
+cont = True
+while cont:   
+    action = input("\nWould you like to do something else? (Y/N)\n")
+    if action == "Y":
+        f.options_display()
+    elif action == "N":
+        cont = False
 
-options_table = input("""
-Press V to view all clients info
-Press C to view clients names
-Press A to add client
-Press U to update client status
-""")
+print(f"Remember your goal for today: {today_goal}. Have a great day!")
 
-if options_table == "V":
-    f.display_clients(c.all_clients)
-elif options_table == "C":
-    print("All  your client names are: ")
-    f.list_clients(c.all_clients)
-elif options_table == "A":
-# Adding a new client:
-    client = input("New client name: ")
-    info = []
-    f.add_client(c.all_clients, client, info)
-# Display all clients in table including new one:
-    f.display_clients(c.all_clients)
-# elif options_table == "U":
+
+
+# if options_table == "V":
+#     f.display_clients(c.all_clients)
+# elif options_table == "C":
+#     print("All  your client names are: ")
+#     f.list_clients(c.all_clients)
+
+# elif options_table == "A":
+# # Adding a new client:
+#     client = input("New client name: ")
+#     info = []
+#     f.add_client(c.all_clients, client, info)
+# # Display all clients in table including new one:
+#     f.display_clients(c.all_clients)
+# # elif options_table == "U":
 
 # else: 
 
