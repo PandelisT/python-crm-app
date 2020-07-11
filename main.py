@@ -1,4 +1,3 @@
-# import clients as c
 import functions as f
 import quotes as q
 import random
@@ -6,10 +5,13 @@ import time
 import pytz
 import json
 from datetime import datetime
+import csv
 from colorama import init, Fore, Back, Style
 init(autoreset=True)
+import pandas as pd
 
-# 1. Log in to application w/ username and password
+
+# # 1. Log in to application w/ username and password
 
 # print(Fore.BLUE + "\n***** Welcome to Nerdy Pandy's CRM Application *****\n")
 
@@ -33,18 +35,20 @@ init(autoreset=True)
 #     exit()
 
 # # Show current time
+
 # tz_Sydney = pytz.timezone('Australia/Sydney')
 # datetime_Sydney = datetime.now(tz_Sydney)
 # print("\nYou logged in at: ", datetime_Sydney.strftime("%H:%M:%S"))
 
 
-# # 2. Random inspirational quote:
+# #  2. Random inspirational quote:
+
 # time.sleep(2)
 # print("\nReady to start? Here some inspiration for you today:\n")
 # inspirational_quote = random.choice(q.quotes)
 # print(inspirational_quote)
 
-# # 3. Set goal for today:
+# #  3. Set goal for today:
 
 # time.sleep(2)
 # today_goal = input("\nWhat will your main goal be for today?\n")
@@ -63,6 +67,10 @@ while cont_display:
         cont_display = False
     else:
         print("That wasn't an option. Try again please.")
+
+# Save to CSV
+df = pd.read_json(r'data')
+df.to_csv(r'all_clients.csv', index = None)
 
 print(f"Remember your goal for today: {today_goal.capitalize()}. Have a great day!")
  

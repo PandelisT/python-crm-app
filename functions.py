@@ -1,6 +1,5 @@
 # Includes all functions in main.py
 import json
-# import clients as c
 from colorama import init, Fore, Back, Style
 init(autoreset=True)
 
@@ -49,13 +48,13 @@ Type the letter here: """)
 
         display_clients(all_clients)
     
-    # elif options_table == "C":
-    #     print("All your client names are: ")
-    #     file_handler = open("data", "r")
-    #     contents = file_handler.read()
-    #     file_handler.close()
-    #     all_clients = json.loads(contents)
-    #     list_clients(all_clients)
+    elif options_table == "C":
+        print("All your client names are: ")
+        file_handler = open("data", "r")
+        contents = file_handler.read()
+        file_handler.close()
+        all_clients = json.loads(contents)
+        list_clients(all_clients)
     
     elif options_table == "A":
 
@@ -96,7 +95,7 @@ def list_clients(clients):
     contents = file_handler.read()
     file_handler.close()
     all_clients_new = json.loads(contents)
-    for client,info in all_clients_new.items():
+    for client,info in sorted(all_clients_new.items()):
         print(client)
 
 #Money owed to me
