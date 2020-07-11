@@ -1,5 +1,5 @@
 # Includes all functions in main.py
-
+import json
 import clients as c
 from colorama import init, Fore, Back, Style
 init(autoreset=True)
@@ -34,14 +34,22 @@ Type the letter here: """)
 
 #Coloured all client's table
 def display_clients(clients):
+    file_handler = open("data", "r")
+    contents = file_handler.read()
+    file_handler.close()
+    all_clients = json.loads(contents)
     print ('\033[31m' + f"{'Client Name':<20} {'Status':<20} {'Payment status':<20} {'Initial Quote':<20}")
-    for client, values in c.all_clients.items():
+    for client, values in all_clients.items():
         print (Back.CYAN + f"{client:<20} {values[0]:<20} {values[1]:<20} {values[2]:<20}")
 
 
 # Clients List only (key in dictionary)
 def list_clients(clients):
-    for client,info in c.all_clients.items():
+    file_handler = open("data", "r")
+    contents = file_handler.read()
+    file_handler.close()
+    all_clients_new = json.loads(contents)
+    for client,info in all_clients_new.items():
         print(client)
 
 # Function to add clients to dictionary
@@ -54,7 +62,14 @@ def add_client(all_clients, client, info):
     init_quote = input("What is the initial quote for the new client: ")
     info.append(init_quote)
     c.all_clients[client] = info
+    
+    file_handler = open("data", "w")
+    json_string = json.dumps(all_clients)
+    file_handler.write(json_string)
+    file_handler.close() 
+    
     return client, info
+
 
 #Money owed to me
 def owed_money_total():
