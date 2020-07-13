@@ -82,13 +82,58 @@ Type the letter here: """)
         all_clients = json.loads(contents)
         list_clients(all_clients)
         name = input("Type the name here: ")
-        update_table = input("""\n
+        
+        if name in all_clients:
+            print("You are editing a current client.")
+            update_table = input("""\n
 What would you like to update?\n
 Press "S" to change status
 Press "PS" to change payment status
 Press "Q" to change quote\n
 Type the letter here: """)
-        update_table = options_table.upper().strip().replace(" ", "")
+        update_table = update_table.upper().strip().replace(" ", "")
+        table = True
+        
+        while table:
+            if update_table == "S":
+                status_change = input("What would you like to change the status to? (onboard/offboard")
+
+                file_handler = open("data", "r")
+                contents = file_handler.read()
+                file_handler.close()
+                all_clients = json.loads(contents)
+
+                for key,value in all_clients.items():
+                    
+                    if key == name:
+                         value[0] = status_change
+                
+                file_handler = open("data", "w")
+                json_string = json.dumps(all_clients)
+                file_handler.write(json_string)
+                file_handler.close() 
+                print(status_change)
+                print(f"Status changed!")
+                print(name,all_clients[name])
+                
+                break
+            elif update_table == "PS":
+                print("PS")
+            elif update_table == "Q":
+                    print("Q")
+            else:
+                print("Unrecognisable option. Try again.")
+                table = False
+        
+        else:
+            print("This client doesn't exist.")
+
+        
+        
+        
+
+
+
 
 
 
