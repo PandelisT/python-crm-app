@@ -1,5 +1,6 @@
 # Includes all functions in main.py
 import json
+import csv
 from colorama import init, Fore, Back, Style
 init(autoreset=True)
 
@@ -46,7 +47,7 @@ Type the letter here: """)
         file_handler.close()
         all_clients = json.loads(contents)
 
-        display_clients(all_clients)
+        return display_clients(all_clients)
     
     elif options_table == "C":
         print("All your client names are: ")
@@ -72,8 +73,25 @@ Type the letter here: """)
     
     elif options_table == "M":
         owed_money_total()
-# elif options_table == "U":
-    
+
+    elif options_table == "U":
+        print("Which client would you like to update?\n")
+        file_handler = open("data", "r")
+        contents = file_handler.read()
+        file_handler.close()
+        all_clients = json.loads(contents)
+        list_clients(all_clients)
+        name = input("Type the name here: ")
+        update_table = input("""\n
+What would you like to update?\n
+Press "S" to change status
+Press "PS" to change payment status
+Press "Q" to change quote\n
+Type the letter here: """)
+        update_table = options_table.upper().strip().replace(" ", "")
+
+
+
     else:
         print("That wasn't an option. Try again: \n")
 
@@ -100,7 +118,7 @@ def list_clients(clients):
 
 #Money owed to me
 def owed_money_total():
-    profit = 0
+    money_owed = 0
     index = 0
     file_handler = open("data", "r")
     contents = file_handler.read()
@@ -109,7 +127,9 @@ def owed_money_total():
     for key,value in all_clients.items():
         if value[1] == "not paid":
             index += 1
-            profit = profit + value[2]  
-    print(f"People owe me {profit}!")
+            money_owed = money_owed + value[2]  
+    print(f"People owe me ${money_owed}!")
+
+
 
 

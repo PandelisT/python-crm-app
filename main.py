@@ -9,9 +9,9 @@ import csv
 from colorama import init, Fore, Back, Style
 init(autoreset=True)
 import pandas as pd
+from datetime import date
 
-
-# # 1. Log in to application w/ username and password
+# 1. Log in to application w/ username and password
 
 # print(Fore.BLUE + "\n***** Welcome to Nerdy Pandy's CRM Application *****\n")
 
@@ -34,14 +34,15 @@ import pandas as pd
 #     print("Too many attempts. Bye!")
 #     exit()
 
-# # Show current time
+# Show current time
 
 # tz_Sydney = pytz.timezone('Australia/Sydney')
 # datetime_Sydney = datetime.now(tz_Sydney)
 # print("\nYou logged in at: ", datetime_Sydney.strftime("%H:%M:%S"))
 
+# start_time = datetime.now()
 
-# #  2. Random inspirational quote:
+#  2. Random inspirational quote:
 
 # time.sleep(2)
 # print("\nReady to start? Here some inspiration for you today:\n")
@@ -68,10 +69,36 @@ while cont_display:
     else:
         print("That wasn't an option. Try again please.")
 
-# Save to CSV
-df = pd.read_json(r'data')
-df.to_csv(r'all_clients.csv', index = None)
+# CSV export options
 
-print(f"Remember your goal for today: {today_goal.capitalize()}. Have a great day!")
+# csv_export = input("Would you like to export all clients data to csv? (Y/N)\n")
+# csv_export = csv_export.upper().strip().replace(" ", "")
+# if csv_export == "Y":
+#     df = pd.read_json(r'data')
+#     df.to_csv(r'all_clients.csv', index = None)
+#     print("\nClient's data exported.\n")
+# else:
+#     pass
+
+# Show end time
+
+# tz_Sydney = pytz.timezone('Australia/Sydney')
+# datetime_Sydney_end = datetime.now(tz_Sydney)
+# print("\nYou finished at: ", datetime_Sydney_end.strftime("%H:%M:%S"))
+
+#show total time in program
+
+# end_time  = datetime.now()            
+# duration = end_time - start_time          
+# duration_in_seconds = duration.total_seconds()
+# minutes =  round(duration_in_seconds/60, 2)
+
+# f = open("time_log", "a")
+# datetime_Sydney = str(datetime_Sydney)
+# f.write(f"\n{datetime_Sydney}")
+# f.close()
+
+# print(f"\nYou spent {minutes} minutes logged on today.\n")
+
+# print(f"Remember your goal for today: {today_goal.capitalize()}. Have a great day!")
  
-
