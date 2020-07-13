@@ -26,7 +26,7 @@ def add_client(all_clients_new, client, info):
     while True:
         try: 
             pay_status = input("What is the payment status of the new client: ")
-            if pay_status == ("paid" or "not paid"):
+            if pay_status == "paid" or pay_status == "not paid":
                 info.append(pay_status)
                 break
         except:
@@ -77,12 +77,12 @@ Type the letter here: """)
         contents = file_handler.read()
         file_handler.close()
         all_clients = json.loads(contents)
-        list_clients(all_clients)
+        return list_clients(all_clients)
     
     elif options_table == "A":
-
 # Adding a new client:
         client = input("New client name: ")
+        client = client.capitalize()
         file_handler = open("data", "r")
         contents = file_handler.read()
         file_handler.close()
@@ -90,10 +90,10 @@ Type the letter here: """)
         info = []
         all_clients_new = all_clients
 
-        add_client(all_clients_new, client, info)
+        return add_client(all_clients_new, client, info)
    
     elif options_table == "M":
-        owed_money_total()
+        return owed_money_total()
 
     elif options_table == "U":
         print("Which client would you like to update?\n")
@@ -102,7 +102,7 @@ Type the letter here: """)
         file_handler.close()
         all_clients = json.loads(contents)
         list_clients(all_clients)
-        name = input("Type the name here: ")
+        name = input("Type the name here: \n")
         
         if name in all_clients:
             print("You are editing a current client.")
@@ -117,7 +117,7 @@ Type the letter here: """)
         
         while table:
             if update_table == "S":
-                status_change = input("What would you like to change the status to? (onboard/offboard")
+                status_change = input("What would you like to change the status to? (onboard/offboard) \n")
 
                 file_handler = open("data", "r")
                 contents = file_handler.read()
@@ -133,9 +133,7 @@ Type the letter here: """)
                 json_string = json.dumps(all_clients)
                 file_handler.write(json_string)
                 file_handler.close() 
-                # print(status_change)
-                print(f"Status changed!")
-                # print(name,all_clients[name])             
+                print(f"Status changed!")           
                 break
             elif update_table == "PS":
                 payment_status_change = input("What would you like to change the payment status to? (paid/not paid)\n")
@@ -154,9 +152,7 @@ Type the letter here: """)
                 json_string = json.dumps(all_clients)
                 file_handler.write(json_string)
                 file_handler.close() 
-                # print(payment_status_change)
-                print(f"Payment Status changed!")
-                # print(name,all_clients[name])             
+                print(f"Payment Status changed!")         
                 break
             elif update_table == "Q":
                 quote_change = int(input("What would you like to change the quote to? \n"))
