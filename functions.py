@@ -13,12 +13,34 @@ all_clients = {
 # Function to add clients to data file
 def add_client(all_clients_new, client, info):
 
-    status = input("What is the status of the new client: ")
-    info.append(status)
-    pay_status = input("What is the payment status of the new client: ")
-    info.append(pay_status)
-    init_quote = input("What is the initial quote for the new client: ")    
-    info.append(init_quote)
+    while True:
+        try: 
+            status = input("What is the status of the new client (onboarded or offboarded): ")
+            if status == ("onboarded" or "offboarded"):
+                info.append(status)
+                break
+        except:
+            print("That wasn't an option, try again.")
+            pass  
+    
+    while True:
+        try: 
+            pay_status = input("What is the payment status of the new client: ")
+            if pay_status == ("paid" or "not paid"):
+                info.append(pay_status)
+                break
+        except:
+            print("That wasn't an option, try again.")
+            pass
+    
+    while True:
+        try: 
+            init_quote = int(input("What is the initial quote for the new client: "))
+            info.append(init_quote)
+            break
+        except:
+            print("That wasn't a number, try again.")
+            pass           
     
     all_clients_new[client] = info 
 
@@ -69,8 +91,7 @@ Type the letter here: """)
         all_clients_new = all_clients
 
         add_client(all_clients_new, client, info)
-
-    
+   
     elif options_table == "M":
         owed_money_total()
 
@@ -112,30 +133,57 @@ Type the letter here: """)
                 json_string = json.dumps(all_clients)
                 file_handler.write(json_string)
                 file_handler.close() 
-                print(status_change)
+                # print(status_change)
                 print(f"Status changed!")
-                print(name,all_clients[name])
-                
+                # print(name,all_clients[name])             
                 break
             elif update_table == "PS":
-                print("PS")
+                payment_status_change = input("What would you like to change the payment status to? (paid/not paid)\n")
+
+                file_handler = open("data", "r")
+                contents = file_handler.read()
+                file_handler.close()
+                all_clients = json.loads(contents)
+
+                for key,value in all_clients.items():
+                    
+                    if key == name:
+                         value[1] = payment_status_change
+                
+                file_handler = open("data", "w")
+                json_string = json.dumps(all_clients)
+                file_handler.write(json_string)
+                file_handler.close() 
+                # print(payment_status_change)
+                print(f"Payment Status changed!")
+                # print(name,all_clients[name])             
+                break
             elif update_table == "Q":
-                    print("Q")
+                quote_change = int(input("What would you like to change the quote to? \n"))
+
+                file_handler = open("data", "r")
+                contents = file_handler.read()
+                file_handler.close()
+                all_clients = json.loads(contents)
+
+                for key,value in all_clients.items():
+                    
+                    if key == name:
+                         value[2] = quote_change
+                
+                file_handler = open("data", "w")
+                json_string = json.dumps(all_clients)
+                file_handler.write(json_string)
+                file_handler.close() 
+                print(f"Quote changed!")
+                break
+            
             else:
                 print("Unrecognisable option. Try again.")
                 table = False
         
         else:
             print("This client doesn't exist.")
-
-        
-        
-        
-
-
-
-
-
 
     else:
         print("That wasn't an option. Try again: \n")
@@ -174,7 +222,4 @@ def owed_money_total():
             index += 1
             money_owed = money_owed + value[2]  
     print(f"People owe me ${money_owed}!")
-
-
-
 
