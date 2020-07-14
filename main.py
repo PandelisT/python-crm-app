@@ -77,7 +77,7 @@ csv_export = csv_export.upper().strip().replace(" ", "")
 if csv_export == "Y":
     df = pd.read_json(r'data')
     df.to_csv(r'all_clients.csv', index = None)
-    print("\nClient's data exported.\n")
+    print("\nClient data exported.\n")
 else:
     pass
 

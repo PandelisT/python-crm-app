@@ -93,7 +93,7 @@ Type the letter here: """)
         return add_client(all_clients_new, client, info)
    
     elif options_table == "M":
-        return owed_money_total()
+        print(owed_money_total())
 
     elif options_table == "U":
         print("Which client would you like to update?\n")
@@ -203,7 +203,8 @@ def list_clients(clients):
     file_handler.close()
     all_clients_new = json.loads(contents)
     for client,info in sorted(all_clients_new.items()):
-        print(client)
+        print (client)
+    
 
 #Money owed to me
 def owed_money_total():
@@ -217,5 +218,5 @@ def owed_money_total():
         if value[1] == "not paid":
             index += 1
             money_owed = money_owed + value[2]  
-    print(f"People owe me ${money_owed}!")
+    return (f"People owe me ${money_owed}!")
 
