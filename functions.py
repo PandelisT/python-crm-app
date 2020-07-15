@@ -14,24 +14,22 @@ all_clients = {
 def add_client(all_clients_new, client, info):
 
     while True:
-        try: 
-            status = input("What is the status of the new client (onboarded or offboarded): ")
-            if status == ("onboarded" or "offboarded"):
-                info.append(status)
-                break
-        except:
+        status = input("What is the status of the new client (onboarded or offboarded): ")
+        if status == ("onboarded" or "offboarded"):
+            info.append(status)
+            break
+        else:
             print("That wasn't an option, try again.")
-            pass  
+            continue  
     
     while True:
-        try: 
-            pay_status = input("What is the payment status of the new client: ")
-            if pay_status == "paid" or pay_status == "not paid":
-                info.append(pay_status)
-                break
-        except:
+        pay_status = input("What is the payment status of the new client: ")
+        if pay_status == "paid" or pay_status == "not paid":
+            info.append(pay_status)
+            break
+        else:
             print("That wasn't an option, try again.")
-            pass
+            continue 
     
     while True:
         try: 
@@ -40,7 +38,7 @@ def add_client(all_clients_new, client, info):
             break
         except:
             print("That wasn't a number, try again.")
-            pass           
+            continue            
     
     all_clients_new[client] = info 
 
