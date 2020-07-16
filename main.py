@@ -15,49 +15,49 @@ from difflib import get_close_matches
 
 # 1. Log in to application w/ username and password
 
-# print(Fore.BLUE + "\n***** Welcome to Nerdy Pandy's CRM Application *****\n")
+print(Fore.BLUE + "\n***** Welcome to Nerdy Pandy's CRM Application *****\n")
 
-# time.sleep(2)
+time.sleep(2)
 
-# print("Please enter the correct username and password combination to access this app:\n")
+print("Please enter the correct username and password combination to access this app:\n")
 
-# count=3
-# while count>0:
-#     username=input("Enter username: ")
-#     password=input("Enter password: ")
-#     if username in un.usernames and password == un.usernames[username]:
-#         print("\nCorrect combination. Access granted!")
-#         break
-#     else:    
-#         count-=1 
-#         print(f"Incorrect combination. You have {count} attempts left.")
+count=3
+while count>0:
+    username=input("Enter username: ")
+    password=input("Enter password: ")
+    if username in un.usernames and password == un.usernames[username]:
+        print("\nCorrect combination. Access granted!")
+        break
+    else:    
+        count-=1 
+        print(f"Incorrect combination. You have {count} attempts left.")
             
-# if count == 0:
-#     print("Too many attempts. Bye!")
-#     exit()
+if count == 0:
+    print("Too many attempts. Bye!")
+    exit()
 
-# # Show current time
+# Show current time
 
-# tz_Sydney = pytz.timezone('Australia/Sydney')
-# datetime_Sydney = datetime.now(tz_Sydney)
-# print("\nYou logged in at: ", datetime_Sydney.strftime("%H:%M:%S"))
+tz_Sydney = pytz.timezone('Australia/Sydney')
+datetime_Sydney = datetime.now(tz_Sydney)
+print("\nYou logged in at: ", datetime_Sydney.strftime("%H:%M:%S"))
 
-# start_time = datetime.now()
+start_time = datetime.now()
 
-# # #  2. Random inspirational quote:
+#  2. Random inspirational quote:
 
-# time.sleep(2)
-# print("\nReady to start? Here some inspiration for you today:\n")
-# inspirational_quote = random.choice(q.quotes)
-# print(Fore.MAGENTA + inspirational_quote)
+time.sleep(2)
+print("\nReady to start? Here some inspiration for you today:\n")
+inspirational_quote = random.choice(q.quotes)
+print(Fore.MAGENTA + inspirational_quote)
 
-# # #  3. Set goal for today:
+#  3. Set goal for today:
 
-# time.sleep(2)
-# today_goal = input("\nWhat will your main goal be for today?\n")
-# print("\nGood job! I will remind you when you're done here of your goal again!\n")
+time.sleep(2)
+today_goal = input("\nWhat will your main goal be for today?\n")
+print("\nGood job! I will remind you when you're done here of your goal again!\n")
 
-# time.sleep(1)
+time.sleep(1)
 
 # 4. Show options table (view clients all info, view client names, add clients, update status of clients):
 

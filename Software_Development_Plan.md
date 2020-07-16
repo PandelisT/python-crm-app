@@ -29,7 +29,7 @@ The user will interact through a series of prompts in the terminal. The prompts 
 The program begins with a welcome message and sleeps for 2 seconds.
 The program then prompts for the correct username and password combination at the beginning of the program and gives access to the application with the correct combination. If the user inputs 3 incorrect combinations in a row the program will exit.
 The program displays the current time of log in and stores this data in the time_log file.
-The program displays a random inspirational quote.
+The program displays a random inspirational quote from the quotes.py file.
 The program prompts the user to enter a goal for the day which will be displayed before the user exits the program and logged in the goal_log file.
 The program then asks if the user would like to do anything else in a loop which is broken by selecting “N”. If the user selects “Y” a table is displayed with various options.
 Once an option is chosen there are various prompts either for more user input or if there is only a display of information the previous loop starts again. 

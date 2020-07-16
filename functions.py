@@ -191,25 +191,29 @@ Type the letter here: """)
                 break
                 
             elif update_table == "Q":
-                quote_change = int(input("What would you like to change the quote to? \n"))
+                try: 
+                    quote_change = int(input("What would you like to change the quote to? \n"))
+                        
+                    file_handler = open("data", "r")
+                    contents = file_handler.read()
+                    file_handler.close()
+                    all_clients = json.loads(contents)
 
-                file_handler = open("data", "r")
-                contents = file_handler.read()
-                file_handler.close()
-                all_clients = json.loads(contents)
-
-                for key,value in all_clients.items():
-                    
-                    if key == name:
-                         value[2] = quote_change
-                
-                file_handler = open("data", "w")
-                json_string = json.dumps(all_clients)
-                file_handler.write(json_string)
-                file_handler.close() 
-                print(f"Quote changed!")
-                break
-            
+                    for key,value in all_clients.items():
+                                    
+                        if key == name:
+                            value[2] = quote_change
+                                
+                    file_handler = open("data", "w")
+                    json_string = json.dumps(all_clients)
+                    file_handler.write(json_string)
+                    file_handler.close() 
+                    print(f"Quote changed!")
+                    break   
+                except:
+                    print("That wasn't a number, try again.") 
+                                 
+                  
             else:
                 print("Unrecognisable option. Try again.")
                 table = False
