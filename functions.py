@@ -62,6 +62,14 @@ def add_client(all_clients_new, client, info):
 
     return all_clients, client, info
 
+# function to delete client
+def delete_client(deleted_client):
+    file_handler = open("data", "w")
+    contents = file_handler.read()
+    file_handler.close()
+    all_clients = json.loads(contents)
+    all_clients = add_clients.pop(deleted_client)
+    
 # function to read json file
 def json_read():
     file_handler = open("data", "r")
@@ -77,7 +85,8 @@ Press "V" to view all clients info
 Press "C" to view clients names
 Press "A" to add client
 Press "M" to see money you're owed currently
-Press "U" to update client status\n
+Press "U" to update client status
+Press "R" to remove client\n
 Type the letter here: """)
     options_table = options_table.upper().strip().replace(" ", "")
     global all_clients
@@ -106,6 +115,29 @@ Type the letter here: """)
     elif options_table == "M":
         print(owed_money_total())
 
+    elif options_table == "R":
+        file_handler = open("data", "r")
+        contents = file_handler.read()
+        file_handler.close()
+        all_clients = json.loads(contents)
+        list_clients(all_clients)
+        
+        while True:
+            name = input("Type the name here that you wish to remove: \n")
+            if name in all_clients:
+                print(all_clients)
+                removed_name = all_clients.pop(name)             
+                print(f"You removed {name} from the list")
+                print(all_clients)
+                file_handler = open("data", "w")
+                json_string = json.dumps(all_clients)
+                file_handler.write(json_string)
+                file_handler.close() 
+                break
+            else:
+                print("This is not a current client. Try again.")
+                continue
+
     elif options_table == "U":
         print("Which client would you like to update?\n")
         file_handler = open("data", "r")
@@ -116,7 +148,6 @@ Type the letter here: """)
         
         while True:
             name = input("Type the name here: \n")
-
             if name in all_clients:
                 print("You are editing a current client.")
                 update_table = input("""\n
