@@ -5,11 +5,7 @@ from colorama import init, Fore, Back, Style
 init(autoreset=True)
 from difflib import get_close_matches
 
-all_clients = {
-    "Spiro" : ["onboard","paid",100], 
-    "Harry" : ["onboard","paid",200], 
-    "Steve" : ["offboard","not paid",300]
-    }
+all_clients = dict()
 
 # Function to add clients to data file
 def add_client(all_clients_new, client, info):
@@ -61,14 +57,6 @@ def add_client(all_clients_new, client, info):
     file_handler.close()  
 
     return all_clients, client, info
-
-# function to delete client
-def delete_client(deleted_client):
-    file_handler = open("data", "w")
-    contents = file_handler.read()
-    file_handler.close()
-    all_clients = json.loads(contents)
-    all_clients = add_clients.pop(deleted_client)
     
 # function to read json file
 def json_read():
@@ -125,10 +113,8 @@ Type the letter here: """)
         while True:
             name = input("Type the name here that you wish to remove: \n")
             if name in all_clients:
-                print(all_clients)
                 removed_name = all_clients.pop(name)             
-                print(f"You removed {name} from the list")
-                print(all_clients)
+                print(f"You removed {name} from the list of clients.")
                 file_handler = open("data", "w")
                 json_string = json.dumps(all_clients)
                 file_handler.write(json_string)
