@@ -89,7 +89,7 @@ tz_Sydney = pytz.timezone('Australia/Sydney')
 datetime_Sydney_end = datetime.now(tz_Sydney)
 print("\nYou finished at: ", datetime_Sydney_end.strftime("%H:%M:%S"))
 
-#show total time spent in program
+# calculate and show total time spent in program
 
 end_time  = datetime.now()            
 duration = end_time - start_time          
@@ -101,10 +101,11 @@ datetime_Sydney = str(datetime_Sydney)
 f.write(f"\n{datetime_Sydney}")
 f.close()
 
+# Log goal in goal_log file
 f = open("goal_log", "a")
 today = date.today()
 datetime_Sydney = str(datetime_Sydney)
-f.write(f"\n {today}: {today_goal}")
+f.write(f"\n {today}: {today_goal.capitalize()}")
 f.close()
 
 print(f"\nYou spent {minutes} minutes logged on today.\n")

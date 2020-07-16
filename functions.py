@@ -62,12 +62,14 @@ def add_client(all_clients_new, client, info):
 
     return all_clients, client, info
 
+# function to read json file
 def json_read():
     file_handler = open("data", "r")
     contents = file_handler.read()
     file_handler.close()
     all_clients = json.loads(contents)
 
+# function to display options table and dealing with the user inputting options
 def options_display():
     options_table = input("""
 Here are your options:\n
@@ -111,22 +113,28 @@ Type the letter here: """)
         file_handler.close()
         all_clients = json.loads(contents)
         list_clients(all_clients)
-        name = input("Type the name here: \n")
         
-        if name in all_clients:
-            print("You are editing a current client.")
-            update_table = input("""\n
+        while True:
+            name = input("Type the name here: \n")
+
+            if name in all_clients:
+                print("You are editing a current client.")
+                update_table = input("""\n
 What would you like to update?\n
 Press "S" to change status
 Press "PS" to change payment status
 Press "Q" to change quote\n
 Type the letter here: """)
-        update_table = update_table.upper().strip().replace(" ", "")
-        table = True
+                update_table = update_table.upper().strip().replace(" ", "")
+                break
+            else:
+                print("This is not a current client. Try again.")
+                continue
         
+        table = True     
         while table:
             if update_table == "S":
-                status_change = input("What would you like to change the status to? (onboard/offboard) \n")
+                status_change = input("What would you like to change the status to? (onboarded/offboarded) \n")
 
                 file_handler = open("data", "r")
                 contents = file_handler.read()
@@ -196,14 +204,13 @@ Type the letter here: """)
         print("That wasn't an option. Try again: \n")
 
 #Coloured all client's table
-
 def display_clients(clients):
     file_handler = open("data", "r")
     contents = file_handler.read()
     file_handler.close()
     all_clients = json.loads(contents)
     print ('\033[31m' + f"{'Client Name':<20} {'Status':<20} {'Payment status':<20} {'Initial Quote':<20}")
-    for client, values in all_clients.items():
+    for client, values in sorted(all_clients.items()):
         print (Back.CYAN + f"{client:<20} {values[0]:<20} {values[1]:<20} {values[2]:<20}")
 
 
