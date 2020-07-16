@@ -3,6 +3,7 @@ import json
 import csv
 from colorama import init, Fore, Back, Style
 init(autoreset=True)
+from difflib import get_close_matches
 
 all_clients = {
     "Spiro" : ["onboard","paid",100], 
@@ -15,9 +16,15 @@ def add_client(all_clients_new, client, info):
 
     while True:
         status = input("What is the status of the new client (onboarded or offboarded): ")
-        if status == ("onboarded" or "offboarded"):
+        if status == "onboarded" or status == "offboarded":
             info.append(status)
             break
+        elif len(get_close_matches(status, ["onboarded", "offboarded"])) > 0:
+            yn = input("Did you mean %s instead? Enter Y is yes, or N if no: " % get_close_matches(status, ["onboarded", "offboarded"])[0])
+            yn = yn.upper().strip().replace(" ", "")
+            if yn == "Y":
+                info.append(get_close_matches(status, ["onboarded", "offboarded"])[0])
+                break
         else:
             print("That wasn't an option, try again.")
             continue  
@@ -27,6 +34,12 @@ def add_client(all_clients_new, client, info):
         if pay_status == "paid" or pay_status == "not paid":
             info.append(pay_status)
             break
+        elif len(get_close_matches(pay_status, ["paid", "not paid"])) > 0:
+            yn = input("Did you mean %s instead? Enter Y is yes, or N if no: " % get_close_matches(pay_status, ["paid", "not paid"])[0])
+            yn = yn.upper().strip().replace(" ", "")
+            if yn == "Y":
+                info.append(get_close_matches(pay_status, ["paid", "not paid"])[0])
+                break      
         else:
             print("That wasn't an option, try again.")
             continue 
@@ -49,6 +62,12 @@ def add_client(all_clients_new, client, info):
 
     return all_clients, client, info
 
+def json_read():
+    file_handler = open("data", "r")
+    contents = file_handler.read()
+    file_handler.close()
+    all_clients = json.loads(contents)
+
 def options_display():
     options_table = input("""
 Here are your options:\n
@@ -59,22 +78,14 @@ Press "M" to see money you're owed currently
 Press "U" to update client status\n
 Type the letter here: """)
     options_table = options_table.upper().strip().replace(" ", "")
-    
-    if options_table == "V":
-        
-        file_handler = open("data", "r")
-        contents = file_handler.read()
-        file_handler.close()
-        all_clients = json.loads(contents)
-
+    global all_clients
+    if options_table == "V":       
+        json_read()     
         return display_clients(all_clients)
     
     elif options_table == "C":
         print("All your client names are: ")
-        file_handler = open("data", "r")
-        contents = file_handler.read()
-        file_handler.close()
-        all_clients = json.loads(contents)
+        json_read()
         return list_clients(all_clients)
     
     elif options_table == "A":
@@ -84,7 +95,7 @@ Type the letter here: """)
         file_handler = open("data", "r")
         contents = file_handler.read()
         file_handler.close()
-        all_clients = json.loads(contents)      
+        all_clients = json.loads(contents)     
         info = []
         all_clients_new = all_clients
 
@@ -133,6 +144,7 @@ Type the letter here: """)
                 file_handler.close() 
                 print(f"Status changed!")           
                 break
+
             elif update_table == "PS":
                 payment_status_change = input("What would you like to change the payment status to? (paid/not paid)\n")
 
@@ -152,6 +164,7 @@ Type the letter here: """)
                 file_handler.close() 
                 print(f"Payment Status changed!")         
                 break
+                
             elif update_table == "Q":
                 quote_change = int(input("What would you like to change the quote to? \n"))
 

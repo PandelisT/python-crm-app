@@ -11,6 +11,7 @@ init(autoreset=True)
 import pandas as pd
 from datetime import date
 import username as un
+from difflib import get_close_matches
 
 # 1. Log in to application w/ username and password
 
@@ -43,18 +44,19 @@ print("\nYou logged in at: ", datetime_Sydney.strftime("%H:%M:%S"))
 
 start_time = datetime.now()
 
-#  2. Random inspirational quote:
+# #  2. Random inspirational quote:
 
 time.sleep(2)
 print("\nReady to start? Here some inspiration for you today:\n")
 inspirational_quote = random.choice(q.quotes)
 print(Fore.MAGENTA + inspirational_quote)
 
-#  3. Set goal for today:
+# #  3. Set goal for today:
 
 time.sleep(2)
 today_goal = input("\nWhat will your main goal be for today?\n")
 print("\nGood job! I will remind you when you're done here of your goal again!\n")
+
 time.sleep(1)
 
 # 4. Show options table (view clients all info, view client names, add clients, update status of clients):
@@ -97,6 +99,12 @@ minutes =  round(duration_in_seconds/60, 2)
 f = open("time_log", "a")
 datetime_Sydney = str(datetime_Sydney)
 f.write(f"\n{datetime_Sydney}")
+f.close()
+
+f = open("goal_log", "a")
+today = date.today()
+datetime_Sydney = str(datetime_Sydney)
+f.write(f"\n {today}: {today_goal}")
 f.close()
 
 print(f"\nYou spent {minutes} minutes logged on today.\n")
