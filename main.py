@@ -1,5 +1,5 @@
 #!/usr/sbin/python
-
+import sys
 import functions as f
 import quotes as q
 import random
@@ -15,11 +15,16 @@ from datetime import date
 import username as un
 from difflib import get_close_matches
 
-# 1. Log in to application w/ username and password
+if "--help" in sys.argv:
+    f.instructions()
+    time.sleep(10)
+else:
+    pass
 
 print(Fore.BLUE + "\n***** Welcome to Nerdy Pandy's CRM Application *****\n")
-
 time.sleep(2)
+
+# 1. Log in to application w/ username and password
 
 print("Please enter the correct username and password combination to access this app:\n")
 
