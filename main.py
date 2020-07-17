@@ -1,3 +1,5 @@
+#!/usr/sbin/python
+
 import functions as f
 import quotes as q
 import random
@@ -73,7 +75,6 @@ while cont_display:
         print("That wasn't an option. Try again please.")
 
 # CSV export options
-
 csv_export = input("Would you like to export all clients data to csv? (Y/N)\n")
 csv_export = csv_export.upper().strip().replace(" ", "")
 if csv_export == "Y":
@@ -84,18 +85,17 @@ else:
     pass
 
 # Show end time
-
 tz_Sydney = pytz.timezone('Australia/Sydney')
 datetime_Sydney_end = datetime.now(tz_Sydney)
 print("\nYou finished at: ", datetime_Sydney_end.strftime("%H:%M:%S"))
 
 # calculate and show total time spent in program
-
-end_time  = datetime.now()            
+end_time = datetime.now()            
 duration = end_time - start_time          
 duration_in_seconds = duration.total_seconds()
 minutes =  round(duration_in_seconds/60, 2)
 
+# Log in time in time_log file
 f = open("time_log", "a")
 datetime_Sydney = str(datetime_Sydney)
 f.write(f"\n{datetime_Sydney}")

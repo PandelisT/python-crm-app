@@ -9,7 +9,6 @@ all_clients = dict()
 
 # Function to add clients to data file
 def add_client(all_clients_new, client, info):
-
     while True:
         status = input("What is the status of the new client (onboarded or offboarded): ")
         if status == "onboarded" or status == "offboarded":
@@ -50,12 +49,10 @@ def add_client(all_clients_new, client, info):
             continue            
     
     all_clients_new[client] = info 
-
     file_handler = open("data", "w")
     json_string = json.dumps(all_clients_new)
     file_handler.write(json_string)
     file_handler.close()  
-
     return all_clients, client, info
     
 # function to read json file
@@ -88,7 +85,6 @@ Type the letter here: """)
         return list_clients(all_clients)
     
     elif options_table == "A":
-# Adding a new client:
         client = input("New client name: ")
         client = client.capitalize()
         file_handler = open("data", "r")
@@ -97,129 +93,16 @@ Type the letter here: """)
         all_clients = json.loads(contents)     
         info = []
         all_clients_new = all_clients
-
         return add_client(all_clients_new, client, info)
    
     elif options_table == "M":
         print(owed_money_total())
 
     elif options_table == "R":
-        file_handler = open("data", "r")
-        contents = file_handler.read()
-        file_handler.close()
-        all_clients = json.loads(contents)
-        list_clients(all_clients)
-        
-        while True:
-            name = input("Type the name here that you wish to remove: \n")
-            if name in all_clients:
-                removed_name = all_clients.pop(name)             
-                print(f"You removed {name} from the list of clients.")
-                file_handler = open("data", "w")
-                json_string = json.dumps(all_clients)
-                file_handler.write(json_string)
-                file_handler.close() 
-                break
-            else:
-                print("This is not a current client. Try again.")
-                continue
+        remove_a_client()
 
     elif options_table == "U":
-        print("Which client would you like to update?\n")
-        file_handler = open("data", "r")
-        contents = file_handler.read()
-        file_handler.close()
-        all_clients = json.loads(contents)
-        list_clients(all_clients)
-        
-        while True:
-            name = input("Type the name here: \n")
-            if name in all_clients:
-                print("You are editing a current client.")
-                update_table = input("""\n
-What would you like to update?\n
-Press "S" to change status
-Press "PS" to change payment status
-Press "Q" to change quote\n
-Type the letter here: """)
-                update_table = update_table.upper().strip().replace(" ", "")
-                break
-            else:
-                print("This is not a current client. Try again.")
-                continue
-        
-        table = True     
-        while table:
-            if update_table == "S":
-                status_change = input("What would you like to change the status to? (onboarded/offboarded) \n")
-
-                file_handler = open("data", "r")
-                contents = file_handler.read()
-                file_handler.close()
-                all_clients = json.loads(contents)
-
-                for key,value in all_clients.items():
-                    
-                    if key == name:
-                         value[0] = status_change
-                
-                file_handler = open("data", "w")
-                json_string = json.dumps(all_clients)
-                file_handler.write(json_string)
-                file_handler.close() 
-                print(f"Status changed!")           
-                break
-
-            elif update_table == "PS":
-                payment_status_change = input("What would you like to change the payment status to? (paid/not paid)\n")
-
-                file_handler = open("data", "r")
-                contents = file_handler.read()
-                file_handler.close()
-                all_clients = json.loads(contents)
-
-                for key,value in all_clients.items():
-                    
-                    if key == name:
-                         value[1] = payment_status_change
-                
-                file_handler = open("data", "w")
-                json_string = json.dumps(all_clients)
-                file_handler.write(json_string)
-                file_handler.close() 
-                print(f"Payment Status changed!")         
-                break
-                
-            elif update_table == "Q":
-                try: 
-                    quote_change = int(input("What would you like to change the quote to? \n"))
-                        
-                    file_handler = open("data", "r")
-                    contents = file_handler.read()
-                    file_handler.close()
-                    all_clients = json.loads(contents)
-
-                    for key,value in all_clients.items():
-                                    
-                        if key == name:
-                            value[2] = quote_change
-                                
-                    file_handler = open("data", "w")
-                    json_string = json.dumps(all_clients)
-                    file_handler.write(json_string)
-                    file_handler.close() 
-                    print(f"Quote changed!")
-                    break   
-                except:
-                    print("That wasn't a number, try again.") 
-                                 
-                  
-            else:
-                print("Unrecognisable option. Try again.")
-                table = False
-        
-        else:
-            print("This client doesn't exist.")
+        updating_client_details()
 
     else:
         print("That wasn't an option. Try again: \n")
@@ -234,7 +117,6 @@ def display_clients(clients):
     for client, values in sorted(all_clients.items()):
         print (Back.CYAN + f"{client:<20} {values[0]:<20} {values[1]:<20} {values[2]:<20}")
 
-
 # Clients List only (key in dictionary)
 def list_clients(clients):
     file_handler = open("data", "r")
@@ -243,9 +125,8 @@ def list_clients(clients):
     all_clients_new = json.loads(contents)
     for client,info in sorted(all_clients_new.items()):
         print (client)
-    
 
-#Money owed to me
+# Money owed to me
 def owed_money_total():
     money_owed = 0
     index = 0
@@ -258,4 +139,121 @@ def owed_money_total():
             index += 1
             money_owed = money_owed + value[2]  
     return (f"People owe me ${money_owed}!")
+
+# Function to remove client
+def remove_a_client():
+    file_handler = open("data", "r")
+    contents = file_handler.read()
+    file_handler.close()
+    all_clients = json.loads(contents)
+    list_clients(all_clients)
+        
+    while True:
+        name = input("Type the name here that you wish to remove: \n")
+        if name in all_clients:
+            removed_name = all_clients.pop(name)             
+            print(f"You removed {name} from the list of clients.")
+            file_handler = open("data", "w")
+            json_string = json.dumps(all_clients)
+            file_handler.write(json_string)
+            file_handler.close() 
+            break
+        else:
+            print("This is not a current client. Try again.")
+            continue
+
+# Function called to update client details
+def updating_client_details():
+    print("Which client would you like to update?\n")
+    file_handler = open("data", "r")
+    contents = file_handler.read()
+    file_handler.close()
+    all_clients = json.loads(contents)
+    list_clients(all_clients)
+        
+    while True:
+        name = input("Type the name here: \n")
+        if name in all_clients:
+            print("You are editing a current client.")
+            update_table = input("""\n
+What would you like to update?\n
+Press "S" to change status
+Press "PS" to change payment status
+Press "Q" to change quote\n
+Type the letter here: """)
+            update_table = update_table.upper().strip().replace(" ", "")
+            break
+        else:
+            print("This is not a current client. Try again.")
+            continue
+        
+    table = True     
+    while table:
+        if update_table == "S":
+            status_change = input("What would you like to change the status to? (onboarded/offboarded) \n")
+
+            file_handler = open("data", "r")
+            contents = file_handler.read()
+            file_handler.close()
+            all_clients = json.loads(contents)
+
+            for key,value in all_clients.items():
+                    
+                if key == name:
+                        value[0] = status_change
+                
+            file_handler = open("data", "w")
+            json_string = json.dumps(all_clients)
+            file_handler.write(json_string)
+            file_handler.close() 
+            print(f"Status changed!")           
+            break
+
+        elif update_table == "PS":
+            payment_status_change = input("What would you like to change the payment status to? (paid/not paid)\n")
+
+            file_handler = open("data", "r")
+            contents = file_handler.read()
+            file_handler.close()
+            all_clients = json.loads(contents)
+
+            for key,value in all_clients.items():
+                    
+                if key == name:
+                        value[1] = payment_status_change
+                
+            file_handler = open("data", "w")
+            json_string = json.dumps(all_clients)
+            file_handler.write(json_string)
+            file_handler.close() 
+            print(f"Payment Status changed!")         
+            break
+                
+        elif update_table == "Q":
+            try: 
+                quote_change = int(input("What would you like to change the quote to? \n"))                      
+                file_handler = open("data", "r")
+                contents = file_handler.read()
+                file_handler.close()
+                all_clients = json.loads(contents)
+
+                for key,value in all_clients.items():
+                                    
+                    if key == name:
+                        value[2] = quote_change
+                                
+                file_handler = open("data", "w")
+                json_string = json.dumps(all_clients)
+                file_handler.write(json_string)
+                file_handler.close() 
+                print(f"Quote changed!")
+                break   
+            except:
+                print("That wasn't a number, try again.")
+                continue                                              
+        else:
+            print("Unrecognisable option. Try again.")
+            table = False
+    else:
+        print("This client doesn't exist.")
 
