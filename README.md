@@ -1,4 +1,4 @@
-This is a help file which includes instructions to run the application.
+This is a **help file** which includes instructions to run the application.
 
 Here are the steps to run this application:
 

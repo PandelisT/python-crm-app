@@ -46,6 +46,7 @@ def log_in():
     if count == 0:
         print("Too many attempts. Bye!")
         exit()
+        
 # Function to add clients to data file
 def add_client(all_clients_new, client, info):
     while True:

@@ -1,4 +1,6 @@
-**Software Development Plan**
+#Software Development Plan#
+
+Please read the README.md file to access the instructions for running this application.
 
 **Statement of Purpose and Scope**
 The application described in this plan has been designed to work as a Customer Relationship Management system which keeps track of customers’ status in a given business. 
@@ -26,26 +28,42 @@ At the end of the application, the program prompts the user if they would like t
 **User interaction and experience**
 
 The user will interact through a series of prompts in the terminal. The prompts will assist the user to select the correct option and will display an error message if the user types the incorrect input.
+The program is executed with "./main.py" or "./main.py --help" to view the instructions to run the app.
 The program begins with a welcome message and sleeps for 2 seconds.
-The program then prompts for the correct username and password combination at the beginning of the program and gives access to the application with the correct combination. If the user inputs 3 incorrect combinations in a row the program will exit.
+The program then prompts for the correct username and password combination at the beginning of the program and gives access to the application with the correct combination. If the user inputs 3 incorrect combinations in a row the program will exit the loop and stop the application.
 The program displays the current time of log in and stores this data in the time_log file.
-The program displays a random inspirational quote from the quotes.py file.
+The program displays a random inspirational quote from list in quotes.py file.
 The program prompts the user to enter a goal for the day which will be displayed before the user exits the program and logged in the goal_log file.
-The program then asks if the user would like to do anything else in a loop which is broken by selecting “N”. If the user selects “Y” a table is displayed with various options.
-Once an option is chosen there are various prompts either for more user input or if there is only a display of information the previous loop starts again. 
+The program then asks if the user would like to do anything else in a while loop which exits by selecting “N”. If the user selects “Y” a table is displayed with various options as many times as the user chooses “Y”.
+Once a listed option is chosen there are various prompts either for more user input or if there is only a display of information the previous loop starts again. If there is a prompt for user input there are conditional statements and try and except blocks to handle errors.
 If the user needs to input information then loops and try and except blocks are used to handle any incorrect information inputted by the user.
-If the user selects an option not in the table the user will be prompted again to select a listed option.
+If the user selects an option not in the table the user will be prompted again to select a listed option for as many times the user needs to select the correct option.
 Once the user selects “N” in the above loop, they are asked if they would like to export the client data to CSV. Selecting “Y” or “N” will continue the program.
 The program will display the overall time that the user was logged in in minutes.
 The program will display the user’s goal for the day and then show a farewell message before exiting the program.
+
 
 **Control Flow Diagram**
 ![Flow Diagram](Pandelis-Toumbelekis-T1A3-Control-Flow-Diagram.jpg)
 
 **Implementation Plan**
-See spreadsheet. 
+See spreadsheet here:
+[Implementation Plan spreadsheet](/home/Pandelis-Toumbelekis-T1A3-Implementation-plan.pdf)
 
-**Developer Operations**
-See screenshots for tracking development.
+See screenshots for tracking of the plan in Trello:
+![Day 1](/home/screenshots/Implementation Plan 1.JPG)
+![Day 2](/home/screenshots/Implementation Plan 2.JPG)
+![Day 3](/home/screenshots/Implementation Plan 3.JPG)
+![Day 4](/home/screenshots/Implementation Plan 4.JPG)
+![Day 5](/home/screenshots/Implementation Plan 5.JPG)
+![Day 6](/home/screenshots/Implementation Plan 6.JPG)
+![Day 7](/home/screenshots/Implementation Plan 7.JPG)
+
+**Testing**
+The testing procedure includes testing the log in function, the options displayed in the table during the application including viewing clients, adding clients, updating clients etc.
+The testing procedure and test cases are included in the PDF below:
+[Manual Testing](/home/Pandelis-Toumbelekis-T1A3-Manual-Testing.pdf)
+
+
 
 
