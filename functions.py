@@ -1,14 +1,23 @@
 # Includes all functions in main.py
+import sys
+import functions as f
+import quotes as q
+import random
+import time
+import pytz
 import json
+from datetime import datetime
 import csv
 from colorama import init, Fore, Back, Style
 init(autoreset=True)
+import pandas as pd
+from datetime import date
+import username as un
 from difflib import get_close_matches
 
 all_clients = dict()
 
 #Instructions
-
 def instructions():
     print("""
 Here are the steps to run this application:
@@ -21,6 +30,22 @@ Here are the steps to run this application:
 6. To run the program again simply follow Step 1. above. 
 """)
 
+# Log in process
+def log_in():
+    count=3
+    while count>0:
+        username=input("Enter username: ")
+        password=input("Enter password: ")
+        if username in un.usernames and password == un.usernames[username]:
+            print("\nCorrect combination. Access granted!")
+            break
+        else:    
+            count-=1 
+            print(f"Incorrect combination. You have {count} attempts left.")
+            
+    if count == 0:
+        print("Too many attempts. Bye!")
+        exit()
 # Function to add clients to data file
 def add_client(all_clients_new, client, info):
     while True:

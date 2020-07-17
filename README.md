@@ -2,7 +2,7 @@ This is a help file which includes instructions to run the application.
 
 Here are the steps to run this application:
 
-1. Run the **./main.py** file in the terminal to start the application.
+1. Run the **./main.py** file in the terminal to start the application. If you need to access these instructions please run **./main.py --help**.
 2. Use the log in details in the **username.py** file to successfully log in and access the application. If you input the incorrect combination three times you will be exited from the application.
 3. Press the ENTER key after any input in the terminal to access the option you chose.
 4. Make sure your input is as accurate as possible according to the prompts.

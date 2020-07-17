@@ -28,20 +28,7 @@ time.sleep(2)
 
 print("Please enter the correct username and password combination to access this app:\n")
 
-count=3
-while count>0:
-    username=input("Enter username: ")
-    password=input("Enter password: ")
-    if username in un.usernames and password == un.usernames[username]:
-        print("\nCorrect combination. Access granted!")
-        break
-    else:    
-        count-=1 
-        print(f"Incorrect combination. You have {count} attempts left.")
-            
-if count == 0:
-    print("Too many attempts. Bye!")
-    exit()
+f.log_in()
 
 # Show current time
 
