@@ -1,4 +1,5 @@
 #!/usr/sbin/python
+
 import sys
 import functions as f
 import quotes as q
